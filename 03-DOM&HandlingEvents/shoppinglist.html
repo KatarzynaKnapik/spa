@@ -8,8 +8,8 @@
 
 <body>
     <h1>Shopping List</h1>
-    <p>
-        New item: <input type="text" name="item">
+    <p >
+        New item: <input type="text" name="item" id="addItem">
         <button type="button">Add</button>
     </p>
     <h3>List of items</h3>
@@ -20,7 +20,17 @@
     </ol>
 
     <script>
-    	// a JavaScript code here ...
+    	const addItem = document.querySelector('#addItem');
+        const button = document.querySelector('button');
+        const body = document.querySelector('body');
+        const ol = document.querySelector('ol');
+        console.log(body);
+        console.log(addItem.value)
+        button.addEventListener('click', ()=>{
+            let li = document.createElement('li');
+            ol.appendChild(li);
+            li.innerHTML = addItem.value;           
+        })
 
     </script>
 </body>

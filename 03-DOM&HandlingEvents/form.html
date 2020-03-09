@@ -9,8 +9,8 @@
 <body>
 	<h1>Filling in a form</h1>
 	<form>
-		<p>University:<br><input type="text"></p>
-		<p>Address:<br><input type="text"></p>
+		<p>University:<br><input type="text" id="uni" ></p>
+		<p>Address:<br><input type="text" id="address"></p>
 		<button type="button">Hint</button>
 	</form>
 
@@ -18,6 +18,21 @@
 		// a JavaScript code here ...
 		var university = "Cracow University of Economics";
 		var address = "Rakowicka 27, Krakow, POLAND";
+		const button = document.querySelector('button');
+		const uni = document.querySelector('#uni');
+		const adrs = document.querySelector('#address');
+		
+
+		function createPlaceholder(){
+			uni.setAttribute('placeholder', university);
+			adrs.setAttribute('placeholder', address);
+		}
+
+		button.addEventListener('click', () =>{
+			createPlaceholder();
+			uni.style.width = "20rem";
+			adrs.style.width = "20rem";
+		})
 
 	</script>
 </body>

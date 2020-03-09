@@ -3,11 +3,90 @@
 	<head>
 		<title>Create DOM elements</title>
 		<meta charset="UTF-8">
+		<style>
+			table{
+				width: 10rem;
+				height: 6rem;
+				padding: 3rem;
+				margin: 10rem auto;
+				font-family:Arial, Helvetica, sans-serif;
+			}
+
+			td{
+				padding: 0.7rem;
+			}
+
+			#inputs{
+				display: block;
+				margin: 5rem auto;
+				text-align: center;
+				padding:1rem;
+				margin: 2rem;
+				font-family: Arial, Helvetica, sans-serif;
+				
+			}
+			input{
+				padding: 0.4rem;
+				margin: 0.7rem;
+				border-radius: 3px;
+				border: 1px solid black;
+			}
+			button{
+				padding:0.6rem 8rem;
+				background: #00ffff;
+				border-radius: 4px;
+				border:none;
+				font-weight: 400;
+			}
+		</style>
 	</head>
+
+	<div id="inputs">
+		<label>Enter table rows: </label>
+		<input type="text" id="rows"><br>
+		<label>Enter table columns: </label>
+		<input type="text" id="cols"><br>
+		<button>Create table</button>
+	</div>
 	<body>
 		<script>
-			// a JavaScript code here ...
+			const button = document.querySelector('button');
+			const body = document.querySelector('body');
+			let tr, td;
 			
+			
+			button.addEventListener('click', () =>{
+				// location.reload();
+				const rows = document.querySelector('#rows').value;
+				const cols = document.querySelector('#cols').value;
+				createTable(rows, cols);
+			});
+
+			function createTable(n, m){
+				let table = document.createElement('table');
+				
+				for(let i =0; i< n; i++){
+				tr = document.createElement('tr');
+				tr.style.border = "1px solid black";
+				table.appendChild(tr);
+				
+				for(let j=0; j < m ;j++){
+					td = document.createElement('td');
+					td.innerHTML = (i*m) + j + 1;
+					td.style.border = "1px solid black";
+					tr.appendChild(td);
+					}
+				}
+				table.style.borderCollapse = "collapse"
+				table.style.border = "1px solid black"
+				if(document.querySelector('body > table')){
+					body.replaceChild(table, body.querySelector('table'));
+				}else{
+					body.appendChild(table);
+				}
+					
+			}
+
 		</script>
 	</body>
 </html>

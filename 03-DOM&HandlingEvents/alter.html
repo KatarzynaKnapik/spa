@@ -15,13 +15,47 @@
 		All in all it's just another brick in the wall<br>
 		All in all you're just another brick in the wall</p>
 		
-		<p style="visibility: hidden;">Pink Floyd were an English rock band formed in London.<br>
+		<p style="visibility: hidden;" id ="band-desc">Pink Floyd were an English rock band formed in London.<br>
 		They achieved international acclaim with their progressive<br>
 		and psychedelic music.</p>
 		
 		<script>
-			// a JavaScript code here ...
-			
+			const title = document.querySelector('h1');
+			const bandName = document.querySelector('h3');
+			const bandDescription = document.querySelector('#band-desc');
+			const body = document.querySelector('body');
+			let para = document.querySelector('p');
+
+			// console.log(para)
+			title.addEventListener('click', () =>{
+				title.innerHTML += '<br/>';
+				title.innerHTML += title.innerText;
+			})
+
+			bandName.addEventListener('click', () =>{
+				bandDescription.style.visibility = "visible";
+			})
+
+			para.addEventListener('click', ()=>{
+				para.style.fontStyle = "italic";
+			})
+			console.log(body)
+			body.addEventListener('dblclick', ()=>{
+				body.style.backgroundColor = "#00FFFF";
+			})
+
+			body.addEventListener('copy', (e) =>{
+				alert('do not still the content!!')
+			})
+
+			bandDescription.addEventListener('click', () =>{
+				let img = document.createElement('img');
+				img.setAttribute('src', 'https://upload.wikimedia.org/wikipedia/en/d/d6/Pink_Floyd_-_all_members.jpg');
+				body.appendChild(img);
+				
+			})
+
+
 		</script>
 	</body>
 </html>

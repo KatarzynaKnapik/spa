@@ -7,6 +7,7 @@
 	<body>
 		<h1>How fast are your fingers?</h1>
 		<h3>You have 30 seconds. Just start typing...</h3>
+		<h2 id="timeRemaining">00:30</h2>
 		<p>Nam strzelać nie kazano. - Wstąpiłem na działo<br>
 		I spójrzałem na pole; dwieście armat grzmiało.<br>
 		Artyleryi ruskiej ciągną się szeregi,<br>
@@ -21,9 +22,43 @@
 		Jak głaz bodzący morze, reduta Ordona.</p>
 		
 		<textarea rows="15" cols="50"></textarea><br>
+		<div class="message"></div>
 		
 		<script>
-			// a JavaScript code here ...
+			const writtenText = document.querySelector('textarea');
+			let message = document.querySelector('.message');
+			let timeRemaining = document.getElementById('timeRemaining');
+			let sec = 10;
+			let characters = '';
+
+			const countTime = () =>{
+				let timer = setInterval(function(){
+					timeRemaining.innerHTML = '00:' + sec;
+					sec--;
+
+					if(sec<0){
+						clearInterval(timer);
+						timeRemaining.innerHTML = 'The time is over.'	
+						writtenText.disabled = true;
+						characters = writtenText.value;
+						let words = characters.split(' ');
+						
+						if(words[words.length-1] === ""){
+							words.pop();
+						}						
+						
+						message.innerHTML = `Congrats! Your score is: ${words.length} words or ${characters.length} characters`
+						
+						
+					}					
+				}, 1000);
+			}
+		
+			writtenText.addEventListener('click', () =>{
+				countTime();
+			})
+
+
 			
 		</script>
 		
