@@ -7,17 +7,36 @@
 	<body>
 		<h1>Ready States</h1>
 		<p>Open a console and then click the button</p>
-		<input type="button" value="Make a connection" onclick="connect()">
+		<input type="button" value="Make a connection" onclick="getData()">
 		
 		<script>
 			function connect(){
-				var method = 'GET';
-				var URL = 'http://api.nbp.pl/api/cenyzlota/last/30/?format=json';
-				var xhr = new XMLHttpRequest();
-				xhr.onreadystatechange = function(){display(this);};
-				xhr.open(method, URL);
-				xhr.send();
+
+				return new Promise((resolve, reject)=>{
+					const method = 'GET';
+					const xhr = new XMLHttpRequest();
+					const URL = 'http://api.nbp.pl/api/cenyzlota/last/30/?format=json';
+
+					xhr.addEventListener('readystatechange', () =>{
+						if(xhr.readyState === 4 && xhr.status === 200){
+							const data = JSON.parse(xhr.responseText);
+							resolve(data)
+						}else if(xhr.readyState === 4){
+							reject('error getting data');
+						}
+					})
+					xhr.open(method, URL);
+					xhr.send();
+
+				})
 			}
+			const getData= () =>{
+				connect()
+					.then(data => console.log(data))
+					.catch(err => console.log('some error', error));
+			}
+			
+
 			function display(r){
 				console.log("Request state:", r.readyState);
 				console.log("Status:", r.status);

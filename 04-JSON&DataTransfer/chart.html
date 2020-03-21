@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <title>Gold Prices - Chart</title>
+</head>
+<body>
+
+    <canvas id="myChart" width="400" height="200"></canvas>
+
+    <script>
+     
+
+        function connect(){
+
+        return new Promise((resolve, reject)=>{
+            const method = 'GET';
+            const xhr = new XMLHttpRequest();
+            const URL = 'http://api.nbp.pl/api/cenyzlota/last/100%20?format=json';
+
+            xhr.addEventListener('readystatechange', () =>{
+                if(xhr.readyState === 4 && xhr.status === 200){
+                    const data = JSON.parse(xhr.responseText);
+                    resolve(data)
+                }else if(xhr.readyState === 4){
+                    reject('error getting data');
+                }
+            })
+            xhr.open(method, URL);
+            xhr.send();
+
+            })
+        }
+
+        const getTimes = (data) =>{
+            let times = new Array(data.length);
+            for(let i=0; i< times.length; i++){
+                times[i] = data[i].data;
+            }
+            return times;
+        }
+
+        const getPrices = data =>{
+            let prices = new Array(data.length);
+            for(let i=0; i<prices.length; i++){
+                prices[i] = data[i].cena;
+            }
+            return prices;
+        }
+        
+        connect()
+            .then(data => drawChart(data))
+            .catch(err => console.log('some error', error));
+
+
+        let ctx = document.getElementById('myChart').getContext('2d');
+        
+        const drawChart = (data) =>{
+            new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: getTimes(data),
+                datasets: [{
+                    label: 'Price of gold in PLN',
+                    data: getPrices(data),
+                    backgroundColor: 'rgba(255,255,255,1)',
+                    pointStyle: 'line',
+                    radius: 1,
+                    pointBackgroundColor: 'rgba(0,0,0,1)'
+                }]
+            },
+            options: {
+                layout: {
+                    padding: {
+                        left: 10,
+                        right: 10,
+                        top: 10,
+                        bottom: 10
+                    }
+                }    
+            },
+        });
+    }
+                
+    </script>
+
+    
+</body>
+</html>
