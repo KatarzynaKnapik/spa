@@ -2,9 +2,44 @@
 <html>
 <head>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <style>
+      h2{
+        text-transform:uppercase;
+      }
+      #content{
+        border-top: dashed;
+        border-bottom: dashed;
+        letter-spacing: 1px;
+        width: 15rem;
+        margin: 3px;
+      }
+      #total{
+        border-top: dashed;
+        width: 15rem;
+        margin:3px;
+        font-weight: 700;
+      }
+
+    </style>
 </head>
 <body>
-  <h1>Grades</h1>    
+  <h2>Receipt</h2>  
+  <div id="app">
+    <div id="content">
+      <p>Product: {{ product.name }}</p>
+      <p>Unit Price: {{ Math.floor(product.unitPrice) }} zł</p>
+      <p>Quantity: {{ product.quantity }}</p>
+      <p>Amount: {{Math.floor(product.unitPrice) * Math.floor(product.quantity) }} zł</p>
+      <p>VAT Tax Rate: {{ product.VAT }}%</p>
+    </div>
+    
+    <div id="total">
+      <p>Total: {{ Math.floor(product.unitPrice) * Math.floor(product.quantity) * ( 1 + product.VAT / 100) }}</p>
+    </div>
+    
+  </div>
+  
 
   <script>
     var app = new Vue({
