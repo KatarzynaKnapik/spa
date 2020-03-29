@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Currency Rates</title>
+
+    <style>
+        table{
+            margin: 20px auto;
+        }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+            }
+    </style>
+
+</head>
+<body>
+
+    <div id="app">
+        <table style="width: 50%">
+            <tr>
+                <th>Currency</th>
+                <th>Code</th>
+                <th>Mid</th>
+            </tr>
+            <tr v-for="rate in rates">
+                <td> {{rate.currency}} </td>
+                <td> {{rate.code}} </td>
+                <td> {{rate.mid}} </td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data:{
+                rates: []
+            },
+            methods:{
+                connect:function(){
+                    return new Promise((resolve, reject)=>{
+                        const method = 'GET';
+                        const xhr = new XMLHttpRequest();
+                        const URL = 'http://api.nbp.pl/api/exchangerates/tables/A/?format=json';
+
+                        xhr.addEventListener('readystatechange', () =>{
+                            if(xhr.readyState === 4 && xhr.status === 200){
+                                const data = JSON.parse(xhr.responseText);
+                                resolve(data)
+                            }else if(xhr.readyState === 4){
+                                reject('error getting data');
+                            }
+                        })
+                        xhr.open(method, URL);
+                        xhr.send();
+                    })
+                }
+            },
+            mounted(){
+                this.connect()
+                    .then(data => this.rates = data[0].rates)
+                    .catch(err => console.log('some error', error));
+            }
+        })
+    </script>
+    
+</body>
+</html>
