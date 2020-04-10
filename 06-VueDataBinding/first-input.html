@@ -6,13 +6,18 @@
 <body>
   <div id="app">
     <span>Your name:</span>
-    <input type="text" v-model="name">  
+    <input type="text" v-model="name" v-on:keyup.enter="logName">  
   </div>
   <script>
     var app = new Vue({
       el: '#app',
       data: {
         name: ''
+      },
+      methods:{
+        logName:function(){
+          console.log(this.name)
+        }
       }
     });
   </script>

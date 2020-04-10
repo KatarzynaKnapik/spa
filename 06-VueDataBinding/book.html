@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="vue-app">
+        <form>
+            <div>
+                <h3>Tytuł</h3>
+                <span style="margin:3px;">Tytuł</span>
+                <input type="text" v-model="title" style="margin:3px;">
+            </div>
+            <div class="autor">
+                <h3>Autor</h3>
+                <span style="margin:3px;">Imię</span>
+                <input type="text" v-model="name" style="margin:3px;">
+                <br>
+                <span style="margin:3px;">Nazwisko</span>
+                <input type="text" v-model="surname" style="margin:3px;">
+            </div>
+            <button v-on:click="logBook">Zapisz</button>
+        </form>
+        
+    </div>
+
+    <script>
+
+        new Vue({
+            el: "#vue-app",
+            data: {
+                title: "",
+                name: "",
+                surname: ""
+            },methods:{
+                logBook:function(e){
+                    e.preventDefault();
+                    console.log(`${this.title} was written by ${this.name} ${this.surname}`)
+                }
+            }
+        })
+
+    </script>
+    
+</body>
+</html>
