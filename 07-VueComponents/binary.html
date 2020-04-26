@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        <numbers v-for="num in numbers" v-bind:number="num"></numbers>
+
+    </div>
+
+
+
+    <script>
+
+        Vue.component('numbers',{
+            props: ['number'],
+            template: `<div>
+                        <p>{{number}} = {{toBinary()}}</p>
+                      </div>`,
+            methods:{
+                toBinary() {
+                    return  this.number.toString(2)  
+                }
+            }
+        })
+
+
+        new Vue({
+            el: '#app',
+            data:{
+                numbers:[8,170,204,3855]
+            }
+        })
+    </script>
+    
+</body>
+</html>

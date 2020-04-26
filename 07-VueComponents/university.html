@@ -4,9 +4,31 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
+  <div id="app">
+    <uek></uek>
 
-  <h1>Cracow University of Economics</h1>
-  <p>31-510 Kraków, Rakowicka 27, POLAND</p>
+  </div>
+ 
+  <script>
+
+    Vue.component('uek', {
+      template: `<div>
+                  <h1>{{name}}</h1> 
+                  <p>{{address}}</p>
+                </div>`,
+      data: function(){
+        return {
+          name:'Cracow Iniversity of Economics',
+          address: '31-510 Kraków, Rakowicka 27, POLAND'
+          }
+      }
+    })
+
+
+    new Vue({
+      el: '#app'
+    })
+  </script>
 
 </body>
 </html>

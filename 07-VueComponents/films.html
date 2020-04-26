@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Films</title>
+</head>
+<body>
+
+    <div id="app">
+      <film_1></film_1>
+      <film_2></film_2>
+      <film_3></film_3>
+    </div>
+
+
+    <script>
+
+        Vue.component('film_1',{
+            template: `<div>
+                        <h3>Tytuł: {{title}}</h3>
+                        <p>Reżyser: {{director}} </p>
+                        <p>Rok produkcji: {{year}}</p>
+                       </div>`,
+            data:function(){
+                return {
+                    title: 'Harry Poter i Kamień filozoficzny',
+                    director: 'Chris Columbus',
+                    year: '2001'
+                }
+            }
+        })
+
+        Vue.component('film_2',{
+            template: `<div>
+                        <h3>Tytuł: {{title}}</h3>
+                        <p>Reżyser: {{director}} </p>
+                        <p>Rok produkcji: {{year}}</p>
+                       </div>`,
+            data:function(){
+                return {
+                    title: 'Harry Poter i Komnata Tajemnic',
+                    director: 'Chris Columbus',
+                    year: '2002'
+                }
+            }
+        })
+
+        Vue.component('film_3',{
+            template: `<div>
+                        <h3>Tytuł: {{title}}</h3>
+                        <p>Reżyser: {{director}} </p>
+                        <p>Rok produkcji: {{year}}</p>
+                       </div>`,
+            data:function(){
+                return {
+                    title: 'Harry Poter i Więzień Azkabanu',
+                    director: 'Chris Columbus',
+                    year: '2004'
+                }
+            }
+        })
+
+        new Vue({
+            el:'#app'
+        })
+
+    </script>
+    
+</body>
+</html>
